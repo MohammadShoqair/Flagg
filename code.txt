@@ -1,0 +1,20 @@
+overlay(
+  rectangle(25,200, "solid", "navy"),
+   
+  overlay(
+    rectangle(300,20, "solid", "navy"),
+    overlay(
+      rectangle(300,40, "solid", "white"),
+    overlay(
+    rectangle(40,200, "solid", "white"),
+    overlay(
+          rectangle(30,40, "solid", "white"),
+          rectangle(300, 200, "solid", "red")
+  
+  )
+  
+  )
+  
+  )
+  )
+  )
