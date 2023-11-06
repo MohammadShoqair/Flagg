@@ -1,15 +1,18 @@
-overlay(
-  rectangle(25,200, "solid", "navy"),
+#del01
+fun scandinavian-flag(top, middle, bot,boot) :
+ overlay(
+    rectangle(25,200, "solid", top),
+    
    
   overlay(
-    rectangle(300,20, "solid", "navy"),
+      rectangle(300,20, "solid", middle),
     overlay(
-      rectangle(300,40, "solid", "white"),
+        rectangle(300,40, "solid", boot),
     overlay(
-    rectangle(40,200, "solid", "white"),
+          rectangle(40,200, "solid", boot),
     overlay(
-          rectangle(30,40, "solid", "white"),
-          rectangle(300, 200, "solid", "red")
+            rectangle(30,40, "solid", boot),
+            rectangle(300, 200, "solid", bot)
   
   )
   
@@ -18,3 +21,49 @@ overlay(
   )
   )
   )
+end
+
+
+print(scandinavian-flag("navy", "navy", "red", "white"))  # Norway
+print(scandinavian-flag("yellow", "yellow", "blue", "yellow")) # Sweden
+print(scandinavian-flag("white", "white", "red", "white"))   # Denmark
+print(scandinavian-flag("blue", "blue", "white", "blue"))   # Finland
+#---------------------------------------------------------------------------
+#del02
+include gdrive sheets
+include data-source
+
+ssid = "1RYN0i4Zx_UETVuYacgaGfnFcv4l9zd9toQTTdkQkj7g"
+
+kWh-wealthy-consumer-data =
+  load-table: component, energy
+  source: load-spreadsheet(ssid).sheet-by-name("kWh", true)
+  sanitize: energy, string-sanitizer
+end
+fun energy-to-number(str :: String) -> Number:
+  cases(str):
+    | "" => 0
+    | otherwise => string-to-number(str)
+  end
+end
+include shared-gdrive(
+  "dcic-2021",
+  "1wyQZj_L0qqV9Ekgr9au6RX2iqt2Ga8Ep"
+)
+
+transform-column(kWh-wealthy-consumer-data, "energy", energy-to-number)
+# Calculate energy consumption for car use (assuming you have this function)
+
+# Sum the energy consumption in the table
+var total-energy-consumption = sum(kWh-wealthy-consumer-data, "energy")
+
+# Print the total energy consumption
+print("Total Energy Consumption: ", total-energy-consumption)
+fun energy-to-number(str :: String) -> Number:
+  cases(str):
+    | "" => 0
+    | otherwise => string-to-number(str)
+  end
+end
+bar-chart(kWh-wealthy-consumer-data, "component", "energy")
+
