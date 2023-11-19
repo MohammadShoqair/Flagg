@@ -1,19 +1,27 @@
 include image
 
-outer-circle = circle(60, "solid", "darkgreen")
-inner-circle = circle(40, "solid", "lightgreen")
+# Define the body
+body = circle(120, "solid", "red")
 
-top-rectangle = rectangle(20, 60, "solid", "lightgreen")
-bot-rectangle = rectangle(20, 60, "solid", "lightgreen")
+# Define the face
+face = circle(80, "solid", "white")
 
-# Tegn figuren
-overlay(
-  inner-circle,
-  overlay(
-    outer-circle,
-    overlay(
-      top-rectangle,
-      bot-rectangle
-    )
-  )
-)
+# Define the eyes
+left_eye = circle(20, "solid", "black")
+right_eye = circle(20, "solid", "black")
+
+# Define the nose
+nose = circle(30, "solid", "red")
+
+# Define the beard
+beard = triangle(200, "solid", "white")
+
+# Define the hat
+hat = triangle(200, "solid", "white")
+
+# Arrange the elements
+face_with_eyes = overlay-xy(left_eye, -40, -40, overlay-xy(right_eye, 40, -40, face))
+santa = overlay-xy(nose, 0, 0, overlay-xy(face_with_eyes, 0, 0, overlay-xy(beard, 0, 50, overlay-xy(hat, 0, -100, body))))
+
+# Draw Santa Claus
+santa
